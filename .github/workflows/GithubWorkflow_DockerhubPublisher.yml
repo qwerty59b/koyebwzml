@@ -1,0 +1,32 @@
+name: Dockerhub Publisher
+
+on:
+  workflow_dispatch:
+    inputs:
+      REPO_N:
+        description: Github and Dockerhub repo name (without user)
+        required: true
+        type: string
+
+      REPO_B:
+        description: Github repo branch
+        required: true
+        type: string
+        default: "main"
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download repo
+        run: |
+          wget "https://gist.githubusercontent.com/qwerty59b/22ea54e6580da6e1a8efab940c7ba519/raw/script_github_Fetch_Repo.sh" -O script.sh
+          bash script.sh "${{ secrets.GH_TOKEN }}" "$GITHUB_ACTOR" "${{ inputs.REPO_N }}" "${{ inputs.REPO_B }}" repodir
+          rm script.sh
+          printf "\n[Repo files]\n"
+          find
+      - name: Publish image
+        run: |
+          wget "https://gist.githubusercontent.com/qwerty59b/6fd6d2cfc7916774b61944df93aba145/raw/script_docker_Publish_Image.sh" -O script.sh
+          bash script.sh "${{ secrets.DK_USER }}" "${{ secrets.DK_PASS }}" "${{ inputs.REPO_N }}" repodir
+          rm script.sh
