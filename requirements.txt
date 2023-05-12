@@ -1,0 +1,16 @@
+aiohttp
+aria2p>=0.9.1
+hachoir
+Pillow
+pyrogram==1.4.16
+tgcrypto
+youtube_dl
+python-dotenv
+beautifulsoup4>=4.8.2
+bs4
+lxml
+requests
+messages
+js2py
+telegraph
+numpy
