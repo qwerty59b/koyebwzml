@@ -39,6 +39,6 @@ speedtest-cli
 telegraph
 tenacity
 tgcrypto
-uvloop==0.18.0
+uvloop
 xattr
 yt-dlp
